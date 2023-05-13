@@ -23,4 +23,4 @@ Il progetto è un gioco platform 2D sviluppato in Godot Engine. Il giocatore con
 1. Clona il repository in locale:
 
 ```bash
-git clone https://github.com/tuonome/nome-repository.git
+git clone https://github.com/Ai2045/Godot_Game.git
