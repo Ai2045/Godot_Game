@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bbfputm3x4ws0"]
+[gd_scene load_steps=44 format=3 uid="uid://bbfputm3x4ws0"]
 
 [ext_resource type="Texture2D" uid="uid://5mrhuqcpik8d" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png" id="1_ojsf8"]
 [ext_resource type="Script" path="res://Character/player.gd" id="1_s5o1q"]
@@ -135,6 +135,45 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_j2y27"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ojsf8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_nfywq"]
@@ -368,6 +407,7 @@ _data = {
 "RESET": SubResource("Animation_qdo23"),
 "attack": SubResource("Animation_rucuq"),
 "double_jump": SubResource("Animation_5c40u"),
+"hurt": SubResource("Animation_j2y27"),
 "idle": SubResource("Animation_nfywq"),
 "jump_attack": SubResource("Animation_hc1uu"),
 "jump_end": SubResource("Animation_scas4"),
@@ -450,9 +490,10 @@ collision_layer = 2
 script = ExtResource("1_s5o1q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-5, -12)
+texture_filter = 1
+position = Vector2(-3, -14)
 texture = ExtResource("1_ojsf8")
-hframes = 6
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1

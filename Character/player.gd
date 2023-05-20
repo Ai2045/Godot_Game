@@ -52,3 +52,7 @@ func update_facing_direction():
 		sprite.flip_h = true
 	
 	emit_signal("facing_direction_changed", !sprite.flip_h)
+
+
+func _on_area_2d_body_entered(body):
+	pass # Replace with function body.
