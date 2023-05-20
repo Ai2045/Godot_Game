@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dt0pg5idntlm1"]
+[gd_scene load_steps=7 format=3 uid="uid://dt0pg5idntlm1"]
 
 [ext_resource type="Texture2D" uid="uid://crg1mbktqqis0" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png" id="1_vqmwd"]
 [ext_resource type="PackedScene" uid="uid://bbfputm3x4ws0" path="res://Character/player.tscn" id="2_q276n"]
+[ext_resource type="PackedScene" uid="uid://xevgyveto822" path="res://Character/Enemy/ghost.tscn" id="3_lbehj"]
+[ext_resource type="PackedScene" uid="uid://33tu0ouidyxv" path="res://UI/health_changedmanager.tscn" id="4_pmmic"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tx2o5"]
 texture = ExtResource("1_vqmwd")
@@ -867,3 +869,8 @@ remote_path = NodePath("../../Camera2D")
 position = Vector2(42, 62)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="ghost" parent="." instance=ExtResource("3_lbehj")]
+position = Vector2(149, 67)
+
+[node name="HealthChangedmanager" parent="." instance=ExtResource("4_pmmic")]

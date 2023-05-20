@@ -4,22 +4,26 @@ class_name CharacterStateMachine
 
 @export var character: CharacterBody2D
 @export var animation_tree: AnimationTree
-@export var ground_state: State
-@export var air_state: State
 
-var current_state: State
+@export var current_state: State
 var states: Array[State] = []
 
 func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states.append(child)
+			
+			#Set the states up with what need to function
 			child.character = character
 			child.playback = animation_tree["parameters/playback"]
+			
+			#Connect to interrupt signal
+			child.connect("interrupt_state", on_state_interrupt_state)
+			
 		else:
 			push_warning("Child " + child.name + " is not a State for CharacterStateMachine")
 
-	switch_state(ground_state)
+	switch_state(current_state)
 
 func _physics_process(delta: float) -> void:
 	if current_state.next_state != null:
@@ -40,3 +44,6 @@ func switch_state(new_state: State) -> void:
 
 func _input(event: InputEvent) -> void:
 	current_state.state_input(event)
+
+func on_state_interrupt_state(new_state :State):
+	switch_state(new_state)
