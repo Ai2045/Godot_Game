@@ -1,10 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt0pg5idntlm1"]
+[gd_scene load_steps=19 format=3 uid="uid://dt0pg5idntlm1"]
 
 [ext_resource type="Texture2D" uid="uid://crg1mbktqqis0" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png" id="1_vqmwd"]
 [ext_resource type="PackedScene" uid="uid://bbfputm3x4ws0" path="res://Character/player.tscn" id="2_q276n"]
 [ext_resource type="PackedScene" uid="uid://xevgyveto822" path="res://Character/Enemy/ghost.tscn" id="3_lbehj"]
 [ext_resource type="PackedScene" uid="uid://33tu0ouidyxv" path="res://UI/health_changedmanager.tscn" id="4_pmmic"]
 [ext_resource type="Script" path="res://Levels/cabioLivello.gd" id="5_152ru"]
+[ext_resource type="Texture2D" uid="uid://bl0j6ev3g7h6q" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-sky.png" id="6_1bolm"]
+[ext_resource type="Texture2D" uid="uid://cr0a6n3rdw0yv" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-mountains.png" id="7_egh7q"]
+[ext_resource type="Texture2D" uid="uid://c1gb18eay8mtx" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-mountains-lights.png" id="8_78hil"]
+[ext_resource type="Texture2D" uid="uid://bo3oerndx0lw0" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-forest.png" id="9_kxuqh"]
+[ext_resource type="Texture2D" uid="uid://s5lfhukal7ld" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-far-buildings.png" id="10_qwuu5"]
+[ext_resource type="Texture2D" uid="uid://vdytx76y2i4m" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-clouds.png" id="11_7ysa1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tx2o5"]
 texture = ExtResource("1_vqmwd")
@@ -855,6 +861,47 @@ sources/0 = SubResource("TileSetAtlasSource_tx2o5")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1emlp"]
 size = Vector2(43, 59)
 
+[sub_resource type="Animation" id="Animation_wqsxy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gvwho"]
+resource_name = "fake out"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gpmvs"]
+resource_name = "fake in"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ivbv7"]
+_data = {
+"RESET": SubResource("Animation_wqsxy"),
+"fake in": SubResource("Animation_gpmvs"),
+"fake out": SubResource("Animation_gvwho")
+}
+
 [node name="TestLevel" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -879,12 +926,58 @@ position = Vector2(149, 67)
 
 [node name="HealthChangedmanager" parent="." instance=ExtResource("4_pmmic")]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Door" type="Area2D" parent="." node_paths=PackedStringArray("animation_player")]
 collision_mask = 2
 script = ExtResource("5_152ru")
+animation_player = NodePath("../AnimationPlayer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2(342.5, 63.5)
 shape = SubResource("RectangleShape2D_1emlp")
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(-64, 4)
+texture = ExtResource("6_1bolm")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Night-town-background-mountains" type="Sprite2D" parent="."]
+position = Vector2(-3, 151)
+texture = ExtResource("7_egh7q")
+
+[node name="Night-town-background-mountains-lights" type="Sprite2D" parent="."]
+position = Vector2(-72, 283)
+texture = ExtResource("8_78hil")
+
+[node name="Night-town-background-forest" type="Sprite2D" parent="."]
+position = Vector2(16, 321)
+texture = ExtResource("9_kxuqh")
+
+[node name="Night-town-background-far-buildings" type="Sprite2D" parent="."]
+position = Vector2(-295, 196)
+texture = ExtResource("10_qwuu5")
+
+[node name="Night-town-background-clouds" type="Sprite2D" parent="."]
+position = Vector2(-31, 3)
+texture = ExtResource("11_7ysa1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CanvasLayer/ColorRect")
+libraries = {
+"": SubResource("AnimationLibrary_ivbv7")
+}
+
+[connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]
