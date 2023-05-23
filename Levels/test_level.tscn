@@ -935,20 +935,38 @@ animation_player = NodePath("../AnimationPlayer")
 position = Vector2(342.5, 63.5)
 shape = SubResource("RectangleShape2D_1emlp")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="backGround" type="ParallaxBackground" parent="."]
 
-[node name="sky" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(-64, 4)
+[node name="skyLayer" type="ParallaxLayer" parent="backGround"]
+
+[node name="sky" type="Sprite2D" parent="backGround/skyLayer"]
+position = Vector2(23, 23)
 texture = ExtResource("6_1bolm")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="sky2" type="Sprite2D" parent="backGround/skyLayer"]
+position = Vector2(116, 23)
+texture = ExtResource("6_1bolm")
 
-[node name="Night-town-background-mountains" type="Sprite2D" parent="."]
-position = Vector2(-3, 151)
+[node name="sky3" type="Sprite2D" parent="backGround/skyLayer"]
+position = Vector2(212, 22)
+texture = ExtResource("6_1bolm")
+
+[node name="sky4" type="Sprite2D" parent="backGround/skyLayer"]
+position = Vector2(307, 23)
+texture = ExtResource("6_1bolm")
+
+[node name="sky5" type="Sprite2D" parent="backGround/skyLayer"]
+position = Vector2(400, 23)
+texture = ExtResource("6_1bolm")
+
+[node name="mountainsLayer" type="ParallaxLayer" parent="backGround"]
+
+[node name="mountain" type="Sprite2D" parent="backGround/mountainsLayer"]
+position = Vector2(24, 22)
 texture = ExtResource("7_egh7q")
 
 [node name="Night-town-background-mountains-lights" type="Sprite2D" parent="."]
-position = Vector2(-72, 283)
+position = Vector2(120, 23)
 texture = ExtResource("8_78hil")
 
 [node name="Night-town-background-forest" type="Sprite2D" parent="."]
@@ -960,7 +978,7 @@ position = Vector2(-295, 196)
 texture = ExtResource("10_qwuu5")
 
 [node name="Night-town-background-clouds" type="Sprite2D" parent="."]
-position = Vector2(-31, 3)
+position = Vector2(-379, 349)
 texture = ExtResource("11_7ysa1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
