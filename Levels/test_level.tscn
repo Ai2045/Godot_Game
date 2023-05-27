@@ -1,16 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://dt0pg5idntlm1"]
+[gd_scene load_steps=16 format=3 uid="uid://dt0pg5idntlm1"]
 
 [ext_resource type="Texture2D" uid="uid://crg1mbktqqis0" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png" id="1_vqmwd"]
 [ext_resource type="PackedScene" uid="uid://bbfputm3x4ws0" path="res://Character/player.tscn" id="2_q276n"]
+[ext_resource type="Script" path="res://Levels/Camera2D.gd" id="3_iab4m"]
 [ext_resource type="PackedScene" uid="uid://xevgyveto822" path="res://Character/Enemy/ghost.tscn" id="3_lbehj"]
 [ext_resource type="PackedScene" uid="uid://33tu0ouidyxv" path="res://UI/health_changedmanager.tscn" id="4_pmmic"]
 [ext_resource type="Script" path="res://Levels/cabioLivello.gd" id="5_152ru"]
-[ext_resource type="Texture2D" uid="uid://bl0j6ev3g7h6q" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-sky.png" id="6_1bolm"]
-[ext_resource type="Texture2D" uid="uid://cr0a6n3rdw0yv" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-mountains.png" id="7_egh7q"]
-[ext_resource type="Texture2D" uid="uid://c1gb18eay8mtx" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-mountains-lights.png" id="8_78hil"]
 [ext_resource type="Texture2D" uid="uid://bo3oerndx0lw0" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-forest.png" id="9_kxuqh"]
-[ext_resource type="Texture2D" uid="uid://s5lfhukal7ld" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-far-buildings.png" id="10_qwuu5"]
-[ext_resource type="Texture2D" uid="uid://vdytx76y2i4m" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-clouds.png" id="11_7ysa1"]
+[ext_resource type="Texture2D" uid="uid://xlr4a2t1bkxy" path="res://assets/gothicvania patreon collection/night-town-background-files/night-town-background-preview-LOW-RES.jpg" id="9_ui84i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tx2o5"]
 texture = ExtResource("1_vqmwd")
@@ -876,6 +873,9 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_gpmvs"]
+resource_name = "fake in"
+
 [sub_resource type="Animation" id="Animation_gvwho"]
 resource_name = "fake out"
 length = 0.6
@@ -892,9 +892,6 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_gpmvs"]
-resource_name = "fake in"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ivbv7"]
 _data = {
 "RESET": SubResource("Animation_wqsxy"),
@@ -903,28 +900,31 @@ _data = {
 }
 
 [node name="TestLevel" type="Node2D"]
+position = Vector2(8, 118)
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 68)
 tile_set = SubResource("TileSet_ye8eb")
 format = 2
 layer_0/name = "Ground"
-layer_0/tile_data = PackedInt32Array(393215, 1900544, 9, 458751, 1900544, 10, 327680, 1966080, 9, 393216, 1966080, 10, 327681, 1900544, 9, 393217, 1900544, 10, 327682, 1966080, 9, 393218, 1966080, 10, 327683, 1900544, 9, 393219, 1900544, 10, 327684, 1966080, 9, 393220, 1966080, 10, 327685, 1900544, 9, 393221, 1900544, 10, 327686, 1966080, 9, 393222, 1966080, 10, 327687, 1900544, 9, 393223, 1900544, 10, 327688, 1966080, 9, 393224, 1966080, 10, 327689, 1900544, 9, 393225, 1900544, 10, 327690, 1966080, 9, 393226, 1966080, 10, 327691, 1900544, 9, 393227, 1900544, 10, 327692, 1966080, 9, 393228, 1966080, 10, 327693, 1900544, 9, 393229, 1900544, 10, 327694, 1966080, 9, 393230, 1966080, 10, 327695, 1900544, 9, 393231, 1900544, 10, 327696, 1966080, 9, 393232, 1966080, 10, 327697, 1900544, 9, 393233, 1900544, 10, 327698, 1966080, 9, 393234, 1966080, 10, 327699, 1900544, 9, 393235, 1900544, 10, 327700, 2686976, 6, 393236, 1966080, 10, 327701, 2752512, 6, 393237, 1900544, 10, 327702, 2818048, 6, 393238, 1966080, 10, 131092, 2686976, 3, 196628, 2686976, 4, 262164, 2686976, 5, 131093, 2752512, 3, 196629, 2752512, 4, 262165, 2752512, 5, 131094, 2818048, 3, 196630, 2818048, 4, 262166, 2818048, 5)
+layer_0/tile_data = PackedInt32Array(393215, 1900544, 9, 458751, 1900544, 10, 327680, 1966080, 9, 393216, 1966080, 10, 327681, 1900544, 9, 393217, 1900544, 10, 327682, 1966080, 9, 393218, 1966080, 10, 327683, 1900544, 9, 393219, 1900544, 10, 327684, 1966080, 9, 393220, 1966080, 10, 327685, 1900544, 9, 393221, 1900544, 10, 327686, 1966080, 9, 393222, 1966080, 10, 327687, 1900544, 9, 393223, 1900544, 10, 327688, 1966080, 9, 393224, 1966080, 10, 327689, 1900544, 9, 393225, 1900544, 10, 327690, 1966080, 9, 393226, 1966080, 10, 327691, 1900544, 9, 393227, 1900544, 10, 327692, 1966080, 9, 393228, 1966080, 10, 327693, 1900544, 9, 393229, 1900544, 10, 327694, 1966080, 9, 393230, 1966080, 10, 327695, 1900544, 9, 393231, 1900544, 10, 327696, 1966080, 9, 393232, 1966080, 10, 327697, 1900544, 9, 393233, 1900544, 10, 327698, 1966080, 9, 393234, 1966080, 10, 327699, 1900544, 9, 393235, 1900544, 10, 327700, 2686976, 6, 393236, 1966080, 10, 327701, 2752512, 6, 393237, 1900544, 10, 327702, 2818048, 6, 393238, 1966080, 10, 131092, 2686976, 3, 196628, 2686976, 4, 262164, 2686976, 5, 131093, 2752512, 3, 196629, 2752512, 4, 262165, 2752512, 5, 131094, 2818048, 3, 196630, 2818048, 4, 262166, 2818048, 5, 393213, 1900544, 9, 458749, 1900544, 10, 393214, 1966080, 9, 458750, 1966080, 10, 393211, 1900544, 9, 458747, 1900544, 10, 393212, 1966080, 9, 458748, 1966080, 10, 393209, 1900544, 9, 458745, 1900544, 10, 393210, 1966080, 9, 458746, 1966080, 10, 393207, 1900544, 9, 458743, 1900544, 10, 393208, 1966080, 9, 458744, 1966080, 10, 393205, 1900544, 9, 458741, 1900544, 10, 393206, 1966080, 9, 458742, 1966080, 10, 393203, 1900544, 9, 458739, 1900544, 10, 393204, 1966080, 9, 458740, 1966080, 10, 393201, 1900544, 9, 458737, 1900544, 10, 393202, 1966080, 9, 458738, 1966080, 10, 393199, 1900544, 9, 458735, 1900544, 10, 393200, 1966080, 9, 458736, 1966080, 10, 393197, 1966080, 9, 458733, 1966080, 10, 393198, 1966080, 9, 458734, 1966080, 10, 393196, 1900544, 9, 458732, 1900544, 10, 393194, 1900544, 9, 458730, 1900544, 10, 393195, 1966080, 9, 458731, 1966080, 10, 393192, 1900544, 9, 458728, 1900544, 10, 393193, 1966080, 9, 458729, 1966080, 10, 393190, 1900544, 9, 458726, 1900544, 10, 393191, 1966080, 9, 458727, 1966080, 10, 393188, 1900544, 9, 458724, 1900544, 10, 393189, 1966080, 9, 458725, 1966080, 10, 393186, 1900544, 9, 458722, 1900544, 10, 393187, 1966080, 9, 458723, 1966080, 10, 393184, 1900544, 9, 458720, 1900544, 10, 393185, 1966080, 9, 458721, 1966080, 10, 393182, 1900544, 9, 458718, 1900544, 10, 393183, 1966080, 9, 458719, 1966080, 10, 393180, 1966080, 9, 458716, 1966080, 10, 393181, 1966080, 9, 458717, 1966080, 10, 393179, 1900544, 9, 458715, 1900544, 10, 393177, 1900544, 9, 458713, 1900544, 10, 393178, 1966080, 9, 458714, 1966080, 10, 393175, 1900544, 9, 458711, 1900544, 10, 393176, 1966080, 9, 458712, 1966080, 10, 393173, 1900544, 9, 458709, 1900544, 10, 393174, 1966080, 9, 458710, 1966080, 10, 393171, 1900544, 9, 458707, 1900544, 10, 393172, 1966080, 9, 458708, 1966080, 10, 393169, 1900544, 9, 458705, 1900544, 10, 393170, 1966080, 9, 458706, 1966080, 10, 393167, 1900544, 9, 458703, 1900544, 10, 393168, 1966080, 9, 458704, 1966080, 10, 393165, 1900544, 9, 458701, 1900544, 10, 393166, 1966080, 9, 458702, 1966080, 10)
 
 [node name="Player" parent="." instance=ExtResource("2_q276n")]
 position = Vector2(42, 62)
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(42, 62)
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(42, 42)
+zoom = Vector2(0.8, 0.8)
 process_callback = 0
 position_smoothing_enabled = true
+script = ExtResource("3_iab4m")
+player = NodePath("../Player")
 
 [node name="ghost" parent="." instance=ExtResource("3_lbehj")]
 position = Vector2(149, 67)
 
 [node name="HealthChangedmanager" parent="." instance=ExtResource("4_pmmic")]
+metadata/_edit_use_anchors_ = true
 
 [node name="Door" type="Area2D" parent="." node_paths=PackedStringArray("animation_player")]
 collision_mask = 2
@@ -936,50 +936,52 @@ position = Vector2(342.5, 63.5)
 shape = SubResource("RectangleShape2D_1emlp")
 
 [node name="backGround" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
 
-[node name="skyLayer" type="ParallaxLayer" parent="backGround"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="backGround"]
+position = Vector2(445, 68)
 
-[node name="sky" type="Sprite2D" parent="backGround/skyLayer"]
-position = Vector2(23, 23)
-texture = ExtResource("6_1bolm")
-
-[node name="sky2" type="Sprite2D" parent="backGround/skyLayer"]
-position = Vector2(116, 23)
-texture = ExtResource("6_1bolm")
-
-[node name="sky3" type="Sprite2D" parent="backGround/skyLayer"]
-position = Vector2(212, 22)
-texture = ExtResource("6_1bolm")
-
-[node name="sky4" type="Sprite2D" parent="backGround/skyLayer"]
-position = Vector2(307, 23)
-texture = ExtResource("6_1bolm")
-
-[node name="sky5" type="Sprite2D" parent="backGround/skyLayer"]
-position = Vector2(400, 23)
-texture = ExtResource("6_1bolm")
-
-[node name="mountainsLayer" type="ParallaxLayer" parent="backGround"]
-
-[node name="mountain" type="Sprite2D" parent="backGround/mountainsLayer"]
-position = Vector2(24, 22)
-texture = ExtResource("7_egh7q")
-
-[node name="Night-town-background-mountains-lights" type="Sprite2D" parent="."]
-position = Vector2(120, 23)
-texture = ExtResource("8_78hil")
-
-[node name="Night-town-background-forest" type="Sprite2D" parent="."]
-position = Vector2(16, 321)
+[node name="Night-town-background-forest2" type="Sprite2D" parent="backGround/ParallaxLayer"]
+position = Vector2(-51, 108)
 texture = ExtResource("9_kxuqh")
 
-[node name="Night-town-background-far-buildings" type="Sprite2D" parent="."]
-position = Vector2(-295, 196)
-texture = ExtResource("10_qwuu5")
+[node name="Night-town-background-forest" type="Sprite2D" parent="backGround/ParallaxLayer"]
+position = Vector2(-21, 107)
+texture = ExtResource("9_kxuqh")
 
-[node name="Night-town-background-clouds" type="Sprite2D" parent="."]
-position = Vector2(-379, 349)
-texture = ExtResource("11_7ysa1")
+[node name="Night-town-background-forest3" type="Sprite2D" parent="backGround/ParallaxLayer"]
+position = Vector2(-115, 108)
+texture = ExtResource("9_kxuqh")
+
+[node name="Night-town-background-forest4" type="Sprite2D" parent="backGround/ParallaxLayer"]
+position = Vector2(-178, 107)
+texture = ExtResource("9_kxuqh")
+
+[node name="Night-town-background-forest5" type="Sprite2D" parent="backGround/ParallaxLayer"]
+position = Vector2(-304, 107)
+texture = ExtResource("9_kxuqh")
+
+[node name="Night-town-background-forest6" type="Sprite2D" parent="backGround/ParallaxLayer"]
+position = Vector2(-240, 107)
+texture = ExtResource("9_kxuqh")
+
+[node name="Night-town-background-forest7" type="Sprite2D" parent="backGround/ParallaxLayer"]
+position = Vector2(-368, 107)
+texture = ExtResource("9_kxuqh")
+
+[node name="Night-town-background-forest8" type="Sprite2D" parent="backGround/ParallaxLayer"]
+position = Vector2(-431, 107)
+texture = ExtResource("9_kxuqh")
+
+[node name="mountainsLayer" type="ParallaxLayer" parent="backGround"]
+position = Vector2(8, 118)
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(512, 0)
+
+[node name="Night-town-background-preview-low-res" type="Sprite2D" parent="backGround/mountainsLayer"]
+position = Vector2(194, 31)
+scale = Vector2(1, 1.33036)
+texture = ExtResource("9_ui84i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
