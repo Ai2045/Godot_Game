@@ -1,7 +1,7 @@
-extends Camera2D
+extends ParallaxBackground
 
-@export var player: CharacterBody2D
+@export var scrolling_speed = 50
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position.x = player.position.x

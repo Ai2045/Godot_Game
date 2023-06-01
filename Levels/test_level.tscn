@@ -1,13 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://dt0pg5idntlm1"]
+[gd_scene load_steps=15 format=3 uid="uid://dt0pg5idntlm1"]
 
-[ext_resource type="Texture2D" uid="uid://crg1mbktqqis0" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png" id="1_vqmwd"]
+[ext_resource type="Texture2D" uid="uid://b5y5vrymm0l88" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png" id="1_vqmwd"]
 [ext_resource type="PackedScene" uid="uid://bbfputm3x4ws0" path="res://Character/player.tscn" id="2_q276n"]
-[ext_resource type="Script" path="res://Levels/Camera2D.gd" id="3_iab4m"]
 [ext_resource type="PackedScene" uid="uid://xevgyveto822" path="res://Character/Enemy/ghost.tscn" id="3_lbehj"]
 [ext_resource type="PackedScene" uid="uid://33tu0ouidyxv" path="res://UI/health_changedmanager.tscn" id="4_pmmic"]
 [ext_resource type="Script" path="res://Levels/cabioLivello.gd" id="5_152ru"]
-[ext_resource type="Texture2D" uid="uid://bo3oerndx0lw0" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-forest.png" id="9_kxuqh"]
-[ext_resource type="Texture2D" uid="uid://xlr4a2t1bkxy" path="res://assets/gothicvania patreon collection/night-town-background-files/night-town-background-preview-LOW-RES.jpg" id="9_ui84i"]
+[ext_resource type="PackedScene" uid="uid://lnr2ptvfbqdi" path="res://Levels/bg.tscn" id="7_mespw"]
+[ext_resource type="Script" path="res://Character/Camera2D.gd" id="9_6lvke"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tx2o5"]
 texture = ExtResource("1_vqmwd")
@@ -906,7 +905,8 @@ _data = {
 }
 
 [node name="TestLevel" type="Node2D"]
-position = Vector2(8, 118)
+position = Vector2(816, 200)
+metadata/_edit_vertical_guides_ = []
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, 68)
@@ -920,14 +920,6 @@ position = Vector2(42, 62)
 collision_layer = 6
 collision_mask = 5
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(42, 42)
-zoom = Vector2(0.8, 0.8)
-process_callback = 0
-position_smoothing_enabled = true
-script = ExtResource("3_iab4m")
-player = NodePath("../Player")
-
 [node name="ghost" parent="." instance=ExtResource("3_lbehj")]
 position = Vector2(149, 67)
 
@@ -940,56 +932,8 @@ script = ExtResource("5_152ru")
 animation_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2(342.5, 63.5)
+position = Vector2(352, 296)
 shape = SubResource("RectangleShape2D_1emlp")
-
-[node name="backGround" type="ParallaxBackground" parent="."]
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="backGround"]
-position = Vector2(445, 68)
-
-[node name="Night-town-background-forest2" type="Sprite2D" parent="backGround/ParallaxLayer"]
-position = Vector2(-51, 108)
-texture = ExtResource("9_kxuqh")
-
-[node name="Night-town-background-forest" type="Sprite2D" parent="backGround/ParallaxLayer"]
-position = Vector2(-21, 107)
-texture = ExtResource("9_kxuqh")
-
-[node name="Night-town-background-forest3" type="Sprite2D" parent="backGround/ParallaxLayer"]
-position = Vector2(-115, 108)
-texture = ExtResource("9_kxuqh")
-
-[node name="Night-town-background-forest4" type="Sprite2D" parent="backGround/ParallaxLayer"]
-position = Vector2(-178, 107)
-texture = ExtResource("9_kxuqh")
-
-[node name="Night-town-background-forest5" type="Sprite2D" parent="backGround/ParallaxLayer"]
-position = Vector2(-304, 107)
-texture = ExtResource("9_kxuqh")
-
-[node name="Night-town-background-forest6" type="Sprite2D" parent="backGround/ParallaxLayer"]
-position = Vector2(-240, 107)
-texture = ExtResource("9_kxuqh")
-
-[node name="Night-town-background-forest7" type="Sprite2D" parent="backGround/ParallaxLayer"]
-position = Vector2(-368, 107)
-texture = ExtResource("9_kxuqh")
-
-[node name="Night-town-background-forest8" type="Sprite2D" parent="backGround/ParallaxLayer"]
-position = Vector2(-431, 107)
-texture = ExtResource("9_kxuqh")
-
-[node name="mountainsLayer" type="ParallaxLayer" parent="backGround"]
-position = Vector2(8, 118)
-motion_scale = Vector2(0.8, 0.8)
-motion_mirroring = Vector2(512, 0)
-
-[node name="Night-town-background-preview-low-res" type="Sprite2D" parent="backGround/mountainsLayer"]
-position = Vector2(194, 31)
-scale = Vector2(1, 1.33036)
-texture = ExtResource("9_ui84i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1007,5 +951,17 @@ root_node = NodePath("../CanvasLayer/ColorRect")
 libraries = {
 "": SubResource("AnimationLibrary_ivbv7")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+limit_left = 0
+limit_top = 0
+limit_bottom = 320
+script = ExtResource("9_6lvke")
+target_path = NodePath("../Player")
+
+[node name="Bg" parent="." instance=ExtResource("7_mespw")]
+follow_viewport_enabled = false
+scroll_ignore_camera_zoom = false
 
 [connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy3ethanclskj"
-path="res://.godot/imported/get-more.jpg-e97976124056532f0aff153461620cbc.ctex"
+uid="uid://yod2a3kmxcyd"
+path="res://.godot/imported/get-more.jpg-726197c6614790465fc4a3aad2d0032a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gothicvania patreon collection/Hell-Hound-Files/PNG/get-more.jpg"
-dest_files=["res://.godot/imported/get-more.jpg-e97976124056532f0aff153461620cbc.ctex"]
+source_file="res://assets/gothicvania patreon collection/Hell-Hound-Files/get-more.jpg"
+dest_files=["res://.godot/imported/get-more.jpg-726197c6614790465fc4a3aad2d0032a.ctex"]
 
 [params]
 
