@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://xevgyveto822"]
+[gd_scene load_steps=20 format=3 uid="uid://xevgyveto822"]
 
 [ext_resource type="Texture2D" uid="uid://bi8swlydwjbtu" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-vanish.png" id="1_infjt"]
 [ext_resource type="Texture2D" uid="uid://djwniyph1nifa" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-idle.png" id="1_jtfys"]
@@ -134,6 +134,9 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_tr7ts"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbhr1"]
+size = Vector2(241, 133)
+
 [node name="ghost" type="CharacterBody2D" node_paths=PackedStringArray("hit_state")]
 collision_layer = 4
 script = ExtResource("1_rdxht")
@@ -184,6 +187,16 @@ can_move = false
 wait_time = 0.25
 one_shot = true
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_pbhr1")
+
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Hit" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
