@@ -1,0 +1,186 @@
+[gd_scene load_steps=10 format=3 uid="uid://lnr2ptvfbqdi"]
+
+[ext_resource type="Script" path="res://Bg.gd" id="1_xnqmu"]
+[ext_resource type="Texture2D" uid="uid://cyslnfxm1vw8u" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-sky.png" id="2_1mt78"]
+[ext_resource type="Script" path="res://Levels/CloudLayer.gd" id="2_sbpug"]
+[ext_resource type="Texture2D" uid="uid://8pce34b3e57l" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-clouds.png" id="4_m0xv4"]
+[ext_resource type="Texture2D" uid="uid://dd1u1hhreplak" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-mountains-lights.png" id="5_qopei"]
+[ext_resource type="Texture2D" uid="uid://ccgrrdcs3aci4" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-mountains.png" id="6_atbi2"]
+[ext_resource type="Texture2D" uid="uid://vohe4ima4qu6" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-forest.png" id="7_qc8h8"]
+[ext_resource type="Texture2D" uid="uid://b8o5m44rp5j2u" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-far-buildings.png" id="8_o7k38"]
+[ext_resource type="Texture2D" uid="uid://bs23ges04d5b4" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-town.png" id="9_nvkuk"]
+
+[node name="Bg" type="ParallaxBackground"]
+follow_viewport_enabled = true
+scroll_ignore_camera_zoom = true
+script = ExtResource("1_xnqmu")
+scrolling_speed = null
+
+[node name="-4" type="ParallaxBackground" parent="."]
+
+[node name="SkyLayer" type="ParallaxLayer" parent="-4"]
+light_mask = 512
+visibility_layer = 512
+texture_repeat = 2
+motion_mirroring = Vector2(1152, 0)
+
+[node name="skyImage" type="Sprite2D" parent="-4/SkyLayer"]
+modulate = Color(1, 1, 1, 0.784314)
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(1, 1.71429)
+texture = ExtResource("2_1mt78")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1152, 224)
+
+[node name="-3" type="ParallaxBackground" parent="."]
+
+[node name="CloudLayer" type="ParallaxLayer" parent="-3"]
+position = Vector2(48, 112)
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1152, 0)
+script = ExtResource("2_sbpug")
+
+[node name="cloudImage2" type="Sprite2D" parent="-3/CloudLayer"]
+show_behind_parent = true
+texture_repeat = 2
+position = Vector2(552, -104)
+texture = ExtResource("4_m0xv4")
+centered = false
+
+[node name="cloudImage" type="Sprite2D" parent="-3/CloudLayer"]
+show_behind_parent = true
+texture_repeat = 2
+position = Vector2(-48, -112)
+texture = ExtResource("4_m0xv4")
+centered = false
+
+[node name="-2" type="ParallaxBackground" parent="."]
+
+[node name="MountainLayer" type="ParallaxLayer" parent="-2"]
+texture_repeat = 2
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="mountainLightImage3" type="Sprite2D" parent="-2/MountainLayer"]
+texture_filter = 1
+position = Vector2(832, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("6_atbi2")
+
+[node name="mountainLightImage2" type="Sprite2D" parent="-2/MountainLayer"]
+position = Vector2(1088, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("6_atbi2")
+
+[node name="mountainImage6" type="Sprite2D" parent="-2/MountainLayer"]
+position = Vector2(704, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("5_qopei")
+
+[node name="mountainLightImage" type="Sprite2D" parent="-2/MountainLayer"]
+position = Vector2(320, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("6_atbi2")
+
+[node name="mountainImage5" type="Sprite2D" parent="-2/MountainLayer"]
+position = Vector2(448, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("5_qopei")
+
+[node name="mountainImage4" type="Sprite2D" parent="-2/MountainLayer"]
+position = Vector2(192, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("5_qopei")
+
+[node name="mountainImage3" type="Sprite2D" parent="-2/MountainLayer"]
+position = Vector2(576, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("5_qopei")
+
+[node name="mountainImage2" type="Sprite2D" parent="-2/MountainLayer"]
+position = Vector2(960, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("5_qopei")
+
+[node name="mountainImage" type="Sprite2D" parent="-2/MountainLayer"]
+position = Vector2(64, 224)
+scale = Vector2(1.33333, 1.42857)
+texture = ExtResource("5_qopei")
+
+[node name="FarBuidLayer" type="ParallaxLayer" parent="-2"]
+texture_repeat = 2
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="buildImage" type="Sprite2D" parent="-2/FarBuidLayer"]
+position = Vector2(356, 204)
+scale = Vector2(1.375, 1.9)
+texture = ExtResource("8_o7k38")
+
+[node name="-1" type="ParallaxBackground" parent="."]
+
+[node name="ForestLayer" type="ParallaxLayer" parent="-1"]
+texture_repeat = 2
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="forestImage10" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(64, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage9" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(192, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage8" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(1088, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage7" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(960, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage6" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(312, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage5" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(832, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage4" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(432, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage3" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(512, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage2" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(760, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="forestImage" type="Sprite2D" parent="-1/ForestLayer"]
+position = Vector2(632, 320)
+scale = Vector2(2, 1.33333)
+texture = ExtResource("7_qc8h8")
+
+[node name="0" type="ParallaxBackground" parent="."]
+
+[node name="TownLayer" type="ParallaxLayer" parent="0"]
+
+[node name="townImage" type="Sprite2D" parent="0/TownLayer"]
+position = Vector2(592, 288)
+scale = Vector2(1.625, 1.87374)
+texture = ExtResource("9_nvkuk")

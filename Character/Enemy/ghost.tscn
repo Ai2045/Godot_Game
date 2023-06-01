@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://xevgyveto822"]
 
-[ext_resource type="Texture2D" uid="uid://bi8swlydwjbtu" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-vanish.png" id="1_infjt"]
-[ext_resource type="Texture2D" uid="uid://djwniyph1nifa" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-idle.png" id="1_jtfys"]
+[ext_resource type="Texture2D" uid="uid://dulh0vnqe7y8h" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-vanish.png" id="1_infjt"]
+[ext_resource type="Texture2D" uid="uid://ihm5dje4bpiq" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-idle.png" id="1_jtfys"]
 [ext_resource type="Script" path="res://Character/Enemy/ghost.gd" id="1_rdxht"]
 [ext_resource type="Script" path="res://Character/Enemy/Damageable.gd" id="2_ntdl5"]
 [ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="4_01ukv"]
