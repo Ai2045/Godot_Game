@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c06qxun30t37y"]
+
+[ext_resource type="PackedScene" uid="uid://s6yyt3vt1ywo" path="res://Boss.tscn" id="1_vfgls"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_vfgls")]
