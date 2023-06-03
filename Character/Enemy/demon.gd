@@ -30,7 +30,7 @@ func _physics_process(delta):
 			$Sprite2D.flip_h = false
 		else:
 			$Sprite2D.flip_h = true
-	
+	move_and_slide()
 
 
 func _on_visibity_area_body_entered(body):

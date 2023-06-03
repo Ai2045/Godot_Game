@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://74uyuviuilfu"]
+[gd_scene load_steps=17 format=3 uid="uid://74uyuviuilfu"]
 
 [ext_resource type="Texture2D" uid="uid://b5y5vrymm0l88" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png" id="2_7pd06"]
 [ext_resource type="PackedScene" uid="uid://33tu0ouidyxv" path="res://UI/health_changedmanager.tscn" id="3_jmcgm"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cn38hk3bx5xmv" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-background.png" id="6_iax7u"]
 [ext_resource type="Script" path="res://Levels/cabioLivello.gd" id="7_6ycff"]
 [ext_resource type="PackedScene" uid="uid://t42qw0jhjwg2" path="res://Character/Enemy/demon.tscn" id="8_ju464"]
+[ext_resource type="PackedScene" uid="uid://bbfputm3x4ws0" path="res://Character/player.tscn" id="8_k065q"]
+[ext_resource type="AudioStream" uid="uid://dvfiy2jv0s6ap" path="res://assets/gothicvania patreon collection/music/14. Centipede Demon.mp3" id="9_n1ohp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tx2o5"]
 texture = ExtResource("2_7pd06")
@@ -1046,5 +1048,13 @@ shape = SubResource("RectangleShape2D_mwmhs")
 
 [node name="Demon" parent="." instance=ExtResource("8_ju464")]
 position = Vector2(1184, -144)
+
+[node name="Player" parent="." instance=ExtResource("8_k065q")]
+position = Vector2(96, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_n1ohp")
+volume_db = 5.0
+autoplay = true
 
 [connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]

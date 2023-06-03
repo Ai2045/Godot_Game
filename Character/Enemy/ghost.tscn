@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://Character/Enemy/ShriekState.gd" id="11_etx73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xone8"]
-size = Vector2(25, 42)
+size = Vector2(38, 44)
 
 [sub_resource type="Animation" id="Animation_f68ls"]
 length = 0.001
@@ -244,9 +244,8 @@ size = Vector2(241, 133)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i12gb"]
 size = Vector2(66, 60.5)
 
-[node name="ghost" type="CharacterBody2D" node_paths=PackedStringArray("hit_state")]
+[node name="ghost" type="CharacterBody2D" node_paths=PackedStringArray("hit_state") groups=["Enemy"]]
 collision_layer = 4
-collision_mask = 6
 script = ExtResource("1_rdxht")
 hit_state = NodePath("CharacterStateMachine/Hit")
 
@@ -317,14 +316,16 @@ script = ExtResource("10_yfs76")
 can_move = false
 
 [node name="VisibityArea" type="Area2D" parent="."]
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisibityArea"]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_pbhr1")
 
 [node name="HurtBox" type="Area2D" parent="."]
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 light_mask = 4

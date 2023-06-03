@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dt0pg5idntlm1"]
+[gd_scene load_steps=21 format=3 uid="uid://dt0pg5idntlm1"]
 
 [ext_resource type="PackedScene" uid="uid://bbfputm3x4ws0" path="res://Character/player.tscn" id="1_36i6k"]
+[ext_resource type="PackedScene" uid="uid://b7he2vx41qgcj" path="res://Menu/game_over.tscn" id="2_r2mup"]
 [ext_resource type="PackedScene" uid="uid://bhdni21kw8i2x" path="res://Character/Enemy/ghost.tscn" id="2_ysw41"]
 [ext_resource type="Texture2D" uid="uid://b5y5vrymm0l88" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png" id="3_ihwqg"]
 [ext_resource type="Texture2D" uid="uid://0rwvigjfaecr" path="res://assets/gothicvania patreon collection/Gothic-Castle-Files/PNG/layers/gothic-castle-tileset.png" id="3_wifv7"]
@@ -9,6 +10,7 @@
 [ext_resource type="Script" path="res://Levels/ProgressBar.gd" id="6_j3je6"]
 [ext_resource type="Script" path="res://Character/Camera2D.gd" id="7_gdbih"]
 [ext_resource type="PackedScene" uid="uid://lnr2ptvfbqdi" path="res://Levels/bg.tscn" id="8_skqlk"]
+[ext_resource type="AudioStream" uid="uid://cbp2j57khgxp6" path="res://assets/gothicvania patreon collection/music/01. Prologue.mp3" id="11_np6og"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0bk2c"]
 texture = ExtResource("3_wifv7")
@@ -626,13 +628,8 @@ position = Vector2(816, 200)
 metadata/_edit_vertical_guides_ = []
 
 [node name="Player" parent="." instance=ExtResource("1_36i6k")]
-visible = true
-position = Vector2(-768, 120)
-collision_mask = 3
-
-[node name="Ghost" parent="." instance=ExtResource("2_ysw41")]
-position = Vector2(-416, 96)
-collision_mask = 7
+position = Vector2(-712, 104)
+GameOverScene = ExtResource("2_r2mup")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, 68)
@@ -701,12 +698,18 @@ format = 2
 layer_0/tile_data = PackedInt32Array(196698, 2686976, 3, 262234, 2686976, 4, 327770, 2686976, 5, 393306, 2686976, 6, 196699, 2752512, 3, 262235, 2752512, 4, 327771, 2752512, 5, 393307, 2752512, 6, 196700, 2818048, 3, 262236, 2818048, 4, 327772, 2818048, 5, 393308, 2818048, 6)
 
 [node name="ghost" parent="." instance=ExtResource("2_ysw41")]
-position = Vector2(-40, 16)
+position = Vector2(-432, 32)
+collision_layer = 7
+collision_mask = 7
 
 [node name="ghost2" parent="." instance=ExtResource("2_ysw41")]
-position = Vector2(664, -48)
+position = Vector2(-8, 24)
+collision_layer = 7
+collision_mask = 7
 
-[node name="ghost3" parent="." instance=ExtResource("2_ysw41")]
-position = Vector2(928, -128)
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+texture_repeat = 2
+stream = ExtResource("11_np6og")
+autoplay = true
 
 [connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]

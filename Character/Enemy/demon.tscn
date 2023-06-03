@@ -210,7 +210,7 @@ size = Vector2(548, 334)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8frd"]
 size = Vector2(141.5, 120.5)
 
-[node name="Demon" type="CharacterBody2D" node_paths=PackedStringArray("hit_state")]
+[node name="Demon" type="CharacterBody2D" node_paths=PackedStringArray("hit_state") groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_ybxvy")

@@ -4,7 +4,9 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @export var speed = 40
 @export var hit_state: State
+@export var knockBack_speed = 1000
 @export var player_chase=false
+@export var visibility_area: Area2D
 var player=null
 var appeared = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -29,6 +31,7 @@ func _physics_process(delta):
 			$Sprite2D.flip_h = false
 		else:
 			$Sprite2D.flip_h = true
+		move_and_slide()
 	
 func _on_area_2d_body_entered(body):
 	if body is Player:
@@ -38,8 +41,6 @@ func _on_area_2d_body_entered(body):
 		appeared = true
 		player_chase=true
 	
-
-
 
 func _on_area_2d_body_exited(body):
 	player=null

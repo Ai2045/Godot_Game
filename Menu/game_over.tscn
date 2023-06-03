@@ -1,15 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7he2vx41qgcj"]
+[gd_scene load_steps=6 format=3 uid="uid://b7he2vx41qgcj"]
 
 [ext_resource type="FontFile" uid="uid://danogvd46jah7" path="res://Font/Roboto-Bold.ttf" id="1_judai"]
-[ext_resource type="PackedScene" uid="uid://dt0pg5idntlm1" path="res://Levels/level_1.tscn" id="1_otelo"]
 
 [sub_resource type="GDScript" id="GDScript_ok28w"]
 script/source = "extends Node2D
 
-@export var mainGameScene : PackedScene
 
-func _on_restart_button_button_up():
-	get_tree().change_scene_to_packed(mainGameScene)
+func _on_try_again_button_button_up():
+	get_tree().change_scene_to_file(\"res://Levels/level_1.tscn\")
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gj2j8"]
@@ -31,7 +29,6 @@ corner_radius_bottom_left = 5
 
 [node name="GameOver" type="Node2D"]
 script = SubResource("GDScript_ok28w")
-mainGameScene = ExtResource("1_otelo")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1154.0
@@ -54,7 +51,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_judai")
 theme_override_font_sizes/font_size = 125
-text = "Game Over"
+text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -69,7 +66,7 @@ size_flags_vertical = 3
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_right = 50
 
-[node name="Restart Button" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+[node name="Try again Button" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_override_constants/outline_size = 0
@@ -79,7 +76,7 @@ theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_gj2j8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7uhh4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pdjpf")
-text = "Restart Game"
+text = "TRY AGAIN"
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -97,10 +94,11 @@ theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_gj2j8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7uhh4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pdjpf")
-text = "Quit"
+text = "QUIT"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 320)
 zoom = Vector2(2.3, 2.3)
 
-[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart Button" to="." method="_on_restart_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Try again Button" to="." method="_on_restart_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Try again Button" to="." method="_on_try_again_button_button_up"]
