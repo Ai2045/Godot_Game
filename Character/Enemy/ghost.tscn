@@ -1,12 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://xevgyveto822"]
+[gd_scene load_steps=33 format=3 uid="uid://bhdni21kw8i2x"]
 
 [ext_resource type="Texture2D" uid="uid://dulh0vnqe7y8h" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-vanish.png" id="1_infjt"]
 [ext_resource type="Texture2D" uid="uid://ihm5dje4bpiq" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-idle.png" id="1_jtfys"]
 [ext_resource type="Script" path="res://Character/Enemy/ghost.gd" id="1_rdxht"]
+[ext_resource type="Texture2D" uid="uid://b7fm862rmvksx" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-appears.png" id="2_bojor"]
 [ext_resource type="Script" path="res://Character/Enemy/Damageable.gd" id="2_ntdl5"]
+[ext_resource type="Texture2D" uid="uid://03mp5e8aegds" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-shriek.png" id="2_s3340"]
 [ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="4_01ukv"]
-[ext_resource type="Script" path="res://Character/State.gd" id="5_8sycv"]
 [ext_resource type="Script" path="res://Character/Enemy/HitState.gd" id="6_s1g3t"]
+[ext_resource type="Script" path="res://Character/Enemy/AppearState.gd" id="7_1y4lj"]
+[ext_resource type="Script" path="res://Character/Enemy/Idle.gd" id="8_6f007"]
+[ext_resource type="Script" path="res://Character/State.gd" id="10_yfs76"]
+[ext_resource type="Script" path="res://Character/Enemy/ShriekState.gd" id="11_etx73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xone8"]
 size = Vector2(25, 42)
@@ -24,6 +29,46 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fwd0v"]
+resource_name = "appears"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_bojor")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_oilu7"]
@@ -65,6 +110,47 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_xj15b"]
+resource_name = "shriek"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_s3340")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_vbci6"]
@@ -110,44 +196,65 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o1wgy"]
 _data = {
 "RESET": SubResource("Animation_f68ls"),
+"appears": SubResource("Animation_fwd0v"),
 "idle": SubResource("Animation_oilu7"),
+"shriek": SubResource("Animation_xj15b"),
 "vanish": SubResource("Animation_vbci6")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yyt1k"]
+animation = &"appears"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vsy8e"]
 animation = &"idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ob7x8"]
+animation = &"shriek"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tq4d5"]
 animation = &"vanish"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_agnyd"]
-advance_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6rn0m"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ux3k7"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nbfuf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g8712"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hmprm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k5xos"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_o55ce"]
+states/Start/position = Vector2(158, 100)
+states/appears/node = SubResource("AnimationNodeAnimation_yyt1k")
+states/appears/position = Vector2(314, 100)
 states/idle/node = SubResource("AnimationNodeAnimation_vsy8e")
-states/idle/position = Vector2(345, 100)
+states/idle/position = Vector2(464, 100)
+states/shriek/node = SubResource("AnimationNodeAnimation_ob7x8")
+states/shriek/position = Vector2(607, 54)
 states/vanish/node = SubResource("AnimationNodeAnimation_tq4d5")
-states/vanish/position = Vector2(493, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_agnyd"), "idle", "vanish", SubResource("AnimationNodeStateMachineTransition_ux3k7")]
+states/vanish/position = Vector2(742, 100)
+transitions = ["Start", "appears", SubResource("AnimationNodeStateMachineTransition_6rn0m"), "appears", "idle", SubResource("AnimationNodeStateMachineTransition_nbfuf"), "idle", "shriek", SubResource("AnimationNodeStateMachineTransition_g8712"), "shriek", "vanish", SubResource("AnimationNodeStateMachineTransition_hmprm"), "idle", "vanish", SubResource("AnimationNodeStateMachineTransition_k5xos")]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_tr7ts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbhr1"]
 size = Vector2(241, 133)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i12gb"]
+size = Vector2(66, 60.5)
+
 [node name="ghost" type="CharacterBody2D" node_paths=PackedStringArray("hit_state")]
 collision_layer = 4
+collision_mask = 6
 script = ExtResource("1_rdxht")
 hit_state = NodePath("CharacterStateMachine/Hit")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_jtfys")
-hframes = 7
+texture = ExtResource("2_s3340")
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_xone8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -167,14 +274,22 @@ script = ExtResource("2_ntdl5")
 script = ExtResource("4_01ukv")
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
-current_state = NodePath("Idle")
+current_state = NodePath("Appears")
 
-[node name="Idle" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("5_8sycv")
-
-[node name="Vanish" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("5_8sycv")
+[node name="Appears" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("enemy", "idle_state", "timer")]
+script = ExtResource("7_1y4lj")
+enemy = NodePath("../..")
+idle_state = NodePath("../Idle")
+timer = NodePath("Timer")
 can_move = false
+
+[node name="Timer" type="Timer" parent="CharacterStateMachine/Appears"]
+wait_time = 0.6
+one_shot = true
+
+[node name="Idle" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("8_6f007")
+attack_state = NodePath("../Shriek")
 
 [node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "vanish_state", "return_state")]
 script = ExtResource("6_s1g3t")
@@ -187,16 +302,45 @@ can_move = false
 wait_time = 0.25
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 4
+[node name="Shriek" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "could_down_timer", "enemy")]
+script = ExtResource("11_etx73")
+idle_state = NodePath("../Idle")
+could_down_timer = NodePath("ColdDownTimer")
+enemy = NodePath("../..")
+can_move = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="ColdDownTimer" type="Timer" parent="CharacterStateMachine/Shriek"]
+wait_time = 0.6
+
+[node name="Vanish" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("10_yfs76")
+can_move = false
+
+[node name="VisibityArea" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibityArea"]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_pbhr1")
 
+[node name="HurtBox" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+light_mask = 4
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_i12gb")
+debug_color = Color(0.996078, 0.223529, 0.196078, 0.419608)
+
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Hit" method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="CharacterStateMachine/Appears/Timer" to="CharacterStateMachine/Appears" method="_on_timer_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="CharacterStateMachine/Shriek/ColdDownTimer" to="CharacterStateMachine/Shriek" method="_on_cold_down_timer_timeout"]
+[connection signal="area_entered" from="VisibityArea" to="CharacterStateMachine/Appears" method="_on_visibity_area_area_entered"]
+[connection signal="body_entered" from="VisibityArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="VisibityArea" to="." method="_on_area_2d_body_exited"]
+[connection signal="area_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_attackable_area_entered"]
+[connection signal="body_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_attackable_body_entered"]
+[connection signal="body_exited" from="HurtBox" to="CharacterStateMachine/Shriek" method="_on_attackable_body_exited"]

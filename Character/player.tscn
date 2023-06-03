@@ -1,10 +1,13 @@
-[gd_scene load_steps=44 format=3 uid="uid://bbfputm3x4ws0"]
+[gd_scene load_steps=56 format=3 uid="uid://bbfputm3x4ws0"]
 
 [ext_resource type="Texture2D" uid="uid://bdtqblptf1w1a" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png" id="1_ojsf8"]
 [ext_resource type="Script" path="res://Character/player.gd" id="1_s5o1q"]
+[ext_resource type="PackedScene" uid="uid://74uyuviuilfu" path="res://Levels/level_2.tscn" id="2_sjsir"]
+[ext_resource type="FontFile" uid="uid://danogvd46jah7" path="res://Font/Roboto-Bold.ttf" id="3_raxrl"]
 [ext_resource type="Texture2D" uid="uid://t1e8w280mdo3" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-jump.png" id="4_dwh6w"]
 [ext_resource type="Texture2D" uid="uid://y56opwnp5lt2" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png" id="5_1x7ng"]
 [ext_resource type="Texture2D" uid="uid://fum41arvrbf8" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-attack.png" id="5_ml3re"]
+[ext_resource type="Texture2D" uid="uid://djgqs4qpolsn2" path="res://assets/gothicvania patreon collection/Gothic-hero-p2-Files/PNG/spritesheets/gothic-hero-hurt.png" id="5_sjfq4"]
 [ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="6_i1chi"]
 [ext_resource type="Texture2D" uid="uid://q0bqnenw8kwf" path="res://assets/gothicvania patreon collection/Gothic-hero-p2-Files/PNG/spritesheets/gothic-hero-jump-attack.png" id="6_vhy5i"]
 [ext_resource type="Script" path="res://Character/GroundState.gd" id="7_1ybb6"]
@@ -12,7 +15,47 @@
 [ext_resource type="Script" path="res://Character/Attack.gd" id="9_d5j7k"]
 [ext_resource type="Script" path="res://Character/stateDebugLabel.gd" id="10_pslb4"]
 [ext_resource type="Script" path="res://Character/sword.gd" id="12_d3tgq"]
+[ext_resource type="Script" path="res://Character/HurtState.gd" id="12_jm745"]
 [ext_resource type="Script" path="res://Character/facingCollisionShape2D.gd" id="13_vpjxb"]
+
+[sub_resource type="GDScript" id="GDScript_ok28w"]
+script/source = "extends Node2D
+
+@export var mainGameScene : PackedScene
+
+func _on_restart_button_button_up():
+	get_tree().change_scene_to_packed(mainGameScene)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gj2j8"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7uhh4"]
+bg_color = Color(0, 0, 0, 0.490196)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdjpf"]
+bg_color = Color(0, 0, 0, 0.686275)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="PackedScene" id="PackedScene_qrk06"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741834, 1073741833, 71, 70, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("GameOver", "Node2D", "script", "mainGameScene", "ColorRect", "ColorRect", "offset_right", "offset_bottom", "color", "MarginContainer", "MarginContainer", "offset_right", "offset_bottom", "theme_override_constants/margin_left", "theme_override_constants/margin_top", "theme_override_constants/margin_right", "theme_override_constants/margin_bottom", "VBoxContainer", "VBoxContainer", "layout_mode", "Label", "Label", "layout_mode", "size_flags_vertical", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "horizontal_alignment", "vertical_alignment", "VBoxContainer", "VBoxContainer", "layout_mode", "size_flags_vertical", "theme_override_constants/separation", "MarginContainer", "MarginContainer", "layout_mode", "size_flags_vertical", "theme_override_constants/margin_left", "theme_override_constants/margin_right", "Restart Button", "Button", "layout_mode", "focus_mode", "theme_override_constants/outline_size", "theme_override_constants/h_separation", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "theme_override_styles/normal", "theme_override_styles/hover", "theme_override_styles/pressed", "text", "MarginContainer3", "MarginContainer", "layout_mode", "size_flags_vertical", "theme_override_constants/margin_left", "theme_override_constants/margin_right", "Quit Button", "Button", "layout_mode", "focus_mode", "theme_override_constants/outline_size", "theme_override_constants/h_separation", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "theme_override_styles/normal", "theme_override_styles/hover", "theme_override_styles/pressed", "text", "_on_restart_button_button_up", "button_up"),
+"node_count": 10,
+"node_paths": [NodePath("."), NodePath("."), NodePath("./MarginContainer"), NodePath("./MarginContainer/VBoxContainer"), NodePath("./MarginContainer/VBoxContainer"), NodePath("./MarginContainer/VBoxContainer/VBoxContainer"), NodePath("./MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"), NodePath("./MarginContainer/VBoxContainer/VBoxContainer"), NodePath("./MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3"), NodePath("."), NodePath("MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Restart Button")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 1073741824, 0, 5, 4, -1, 3, 6, 2, 7, 3, 8, 4, 0, 1073741825, 0, 10, 9, -1, 6, 11, 5, 12, 6, 13, 7, 14, 8, 15, 9, 16, 10, 0, 1073741826, 0, 18, 17, -1, 1, 19, 11, 0, 1073741827, 0, 21, 20, -1, 7, 22, 12, 23, 13, 24, 14, 25, 15, 26, 16, 27, 17, 28, 18, 0, 1073741828, 0, 30, 29, -1, 3, 31, 19, 32, 20, 33, 21, 0, 1073741829, 0, 35, 34, -1, 4, 36, 22, 37, 23, 38, 24, 39, 25, 0, 1073741830, 0, 41, 40, -1, 10, 42, 26, 43, 27, 44, 28, 45, 29, 46, 30, 47, 31, 48, 32, 49, 33, 50, 34, 51, 35, 0, 1073741831, 0, 53, 52, -1, 4, 54, 36, 55, 37, 56, 38, 57, 39, 0, 1073741832, 0, 59, 58, -1, 10, 60, 40, 61, 41, 62, 42, 63, 43, 64, 44, 65, 45, 66, 46, 67, 47, 68, 48, 69, 49, 0),
+"variants": [SubResource("GDScript_ok28w"), ExtResource("2_sjsir"), 1154.0, 648.0, Color(0, 0, 0, 1), 1152.0, 648.0, 200, 75, 200, 150, 2, 2, 3, ExtResource("3_raxrl"), 125, "Game Over", 1, 1, 2, 3, 20, 2, 3, 50, 50, 2, 0, 0, 0, ExtResource("3_raxrl"), 75, SubResource("StyleBoxFlat_gj2j8"), SubResource("StyleBoxFlat_7uhh4"), SubResource("StyleBoxFlat_pdjpf"), "Restart Game", 2, 3, 50, 50, 2, 0, 0, 0, ExtResource("3_raxrl"), 75, SubResource("StyleBoxFlat_gj2j8"), SubResource("StyleBoxFlat_7uhh4"), SubResource("StyleBoxFlat_pdjpf"), "Quit"],
+"version": 3
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vfi8"]
 height = 40.0
@@ -139,6 +182,8 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_j2y27"]
 resource_name = "hurt"
+length = 0.3
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -149,7 +194,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_ojsf8")]
+"values": [ExtResource("5_sjfq4")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -161,7 +206,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [3]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -170,10 +215,10 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": []
+"values": [0, 1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_nfywq"]
@@ -418,6 +463,9 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w8t8g"]
 animation = &"attack"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g5lru"]
+animation = &"hurt"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ssg1"]
 animation = &"jump_attack"
 
@@ -465,19 +513,25 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_trq0t"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rjce1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5l3lw"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_56q08"]
 states/Start/position = Vector2(188, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_w8t8g")
 states/attack/position = Vector2(403, 182)
+states/hurt/node = SubResource("AnimationNodeAnimation_g5lru")
+states/hurt/position = Vector2(287.73, 173)
 states/jump_attack/node = SubResource("AnimationNodeAnimation_8ssg1")
 states/jump_attack/position = Vector2(709.73, 40)
 states/jump_end/node = SubResource("AnimationNodeAnimation_6orlt")
-states/jump_end/position = Vector2(646.73, 126)
+states/jump_end/position = Vector2(646.73, 113)
 states/jump_start/node = SubResource("AnimationNodeAnimation_tnxdd")
 states/jump_start/position = Vector2(533.73, 40)
 states/move/node = SubResource("AnimationNodeBlendSpace1D_b16dm")
 states/move/position = Vector2(403, 100)
-transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_nfdwf"), "move", "jump_start", SubResource("AnimationNodeStateMachineTransition_cue1x"), "jump_start", "jump_end", SubResource("AnimationNodeStateMachineTransition_h4w62"), "jump_end", "move", SubResource("AnimationNodeStateMachineTransition_pymey"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_8lqmn"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_gu3p6"), "jump_start", "jump_attack", SubResource("AnimationNodeStateMachineTransition_qn5q2"), "jump_attack", "jump_end", SubResource("AnimationNodeStateMachineTransition_trq0t")]
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_nfdwf"), "move", "jump_start", SubResource("AnimationNodeStateMachineTransition_cue1x"), "jump_start", "jump_end", SubResource("AnimationNodeStateMachineTransition_h4w62"), "jump_end", "move", SubResource("AnimationNodeStateMachineTransition_pymey"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_8lqmn"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_gu3p6"), "jump_start", "jump_attack", SubResource("AnimationNodeStateMachineTransition_qn5q2"), "jump_attack", "jump_end", SubResource("AnimationNodeStateMachineTransition_trq0t"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_rjce1"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_5l3lw")]
 graph_offset = Vector2(78.7298, 0)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_0es38"]
@@ -485,17 +539,25 @@ graph_offset = Vector2(78.7298, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_civ2i"]
 size = Vector2(30, 43)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurt_state", "coldDownTimer")]
+visible = false
 collision_layer = 2
 script = ExtResource("1_s5o1q")
+hurt_state = NodePath("CharacterStateMachine/Hurt")
+coldDownTimer = NodePath("ColdDownTimer")
+GameOverScene = SubResource("PackedScene_qrk06")
+
+[node name="ColdDownTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-3, -14)
 texture = ExtResource("1_ojsf8")
-hframes = 4
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 3
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(-2, -14)
@@ -524,18 +586,26 @@ script = ExtResource("7_1ybb6")
 air_state = NodePath("../Air")
 attack_state = NodePath("../Attack")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "attack_state")]
 script = ExtResource("8_whget")
 ground_state = NodePath("../Ground")
+attack_state = NodePath("../Attack")
 
 [node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "air_state")]
 script = ExtResource("9_d5j7k")
 ground_state = NodePath("../Ground")
 air_state = NodePath("../Air")
+can_move = false
 
 [node name="Timer" type="Timer" parent="CharacterStateMachine/Attack"]
 wait_time = 0.2
 one_shot = true
+
+[node name="Hurt" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "coldDownTimer", "player")]
+script = ExtResource("12_jm745")
+ground_state = NodePath("../Ground")
+coldDownTimer = NodePath("")
+player = NodePath("../..")
 
 [node name="stateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 texture_filter = 1
@@ -561,5 +631,6 @@ script = ExtResource("13_vpjxb")
 facing_left_position = Vector2(-26, -16)
 facing_right_position = Vector2(26, -16)
 
+[connection signal="timeout" from="ColdDownTimer" to="." method="_on_cold_down_timer_timeout"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="body_entered" from="sword" to="sword" method="_on_body_entered"]

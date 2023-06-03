@@ -10,11 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://b8o5m44rp5j2u" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-far-buildings.png" id="8_o7k38"]
 [ext_resource type="Texture2D" uid="uid://bs23ges04d5b4" path="res://assets/gothicvania patreon collection/night-town-background-files/layers/night-town-background-town.png" id="9_nvkuk"]
 
-[node name="Bg" type="ParallaxBackground"]
-follow_viewport_enabled = true
-scroll_ignore_camera_zoom = true
+[node name="Bg1" type="Node"]
 script = ExtResource("1_xnqmu")
-scrolling_speed = null
 
 [node name="-4" type="ParallaxBackground" parent="."]
 

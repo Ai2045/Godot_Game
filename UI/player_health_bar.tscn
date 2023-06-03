@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bukj8uf477h8h"]
+
+[ext_resource type="Script" path="res://UI/HealthBar.gd" id="1_sasut"]
+
+[node name="PlayerHealthBar" type="Node"]
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_sasut")

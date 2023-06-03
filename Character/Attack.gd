@@ -4,7 +4,7 @@ extends State
 @export var air_state: State
 @export var return_animation_node: String = "move"
 @export var attack_ground: String = "attack"
-@export var attack_jump: String = "attack_jump"
+@export var attack_jump: String = "jump_attack"
 
 @onready var timer: Timer = $Timer
 

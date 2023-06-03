@@ -17,6 +17,7 @@ func state_process(delta: float) -> void:
 		if !jumpEnded:
 			jumpEnded = true
 			playback.travel(jump_animation)
+			print(ground_state)
 			next_state = ground_state
 	else:
 		jumpEnded = false

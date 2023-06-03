@@ -1,11 +1,10 @@
 extends State
 
-class_name HitState
+class_name DemonHitState
 
-@export var damageable : Damageable
-@export var vanish_state : State
-@export var vanish_animation_node: String = "vanish"
-@export var knockback_speed: float = 500
+@export var damageable : DemonDemageable
+@export var dead_state : State
+@export var knockback_speed: float = 1000
 @export var return_state :State
 @onready var timer : Timer = $Timer
 
@@ -20,8 +19,7 @@ func on_damageable_hit(node : Node, damage_amount : int, knockback_diretion: Vec
 		character.velocity = knockback_speed * knockback_diretion
 		emit_signal("interrupt_state", self)
 	else :
-		emit_signal("interrupt_state", vanish_state)
-		playback.travel(vanish_animation_node)
+		emit_signal("interrupt_state", dead_state)
 	
 
 func on_exit():

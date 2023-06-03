@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgynotwhrcuc7"]
+
+[ext_resource type="Texture2D" uid="uid://cn38hk3bx5xmv" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-background.png" id="1_afp4p"]
+
+[node name="bg2" type="Node2D"]
+
+[node name="background" type="ParallaxBackground" parent="."]
+
+[node name="BackGroundLayer" type="ParallaxLayer" parent="background"]
+light_mask = 512
+visibility_layer = 512
+texture_repeat = 2
+motion_mirroring = Vector2(1152, 0)
+
+[node name="backgroundImage" type="Sprite2D" parent="background/BackGroundLayer"]
+position = Vector2(576, 224)
+scale = Vector2(1, 1.05263)
+texture = ExtResource("1_afp4p")
+region_enabled = true
+region_rect = Rect2(0, 0, 1152, 304)
