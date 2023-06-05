@@ -59,13 +59,13 @@ func update_facing_direction():
 	emit_signal("facing_direction_changed", !sprite.flip_h)
 
 func update_health():
-	pass
+	coldDownTimer.start()
 	
 	
 func update_hurt(is_attacked: bool):
 	if is_attacked :
 		character_state_machine.switch_state(hurt_state)
-		coldDownTimer.start()
+		
 		
 	
 	

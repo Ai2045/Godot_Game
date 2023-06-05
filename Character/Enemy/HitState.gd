@@ -16,10 +16,12 @@ func on_enter() -> void:
 	timer.start()
 
 func on_damageable_hit(node : Node, damage_amount : int, knockback_diretion: Vector2):
+	print(damageable.health)
 	if damageable.health > 0:
 		character.velocity = knockback_speed * knockback_diretion
 		emit_signal("interrupt_state", self)
-	else :
+		
+	if damageable.health <= 0:
 		emit_signal("interrupt_state", vanish_state)
 		playback.travel(vanish_animation_node)
 	

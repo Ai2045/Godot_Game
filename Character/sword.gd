@@ -20,6 +20,7 @@ func _on_body_entered(body):
 				child.hit(damage, Vector2.LEFT)
 			else:
 				child.hit(damage, Vector2.ZERO)
+			print(body.name)
 
 func _on_player_facing_diretion_changed(facing_right : bool):
 	if facing_right:

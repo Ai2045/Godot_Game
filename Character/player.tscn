@@ -1,7 +1,8 @@
-[gd_scene load_steps=49 format=3 uid="uid://bbfputm3x4ws0"]
+[gd_scene load_steps=50 format=3 uid="uid://bbfputm3x4ws0"]
 
 [ext_resource type="Texture2D" uid="uid://bdtqblptf1w1a" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png" id="1_ojsf8"]
 [ext_resource type="Script" path="res://Character/player.gd" id="1_s5o1q"]
+[ext_resource type="PackedScene" uid="uid://b7he2vx41qgcj" path="res://Menu/game_over.tscn" id="2_wrfj4"]
 [ext_resource type="Texture2D" uid="uid://t1e8w280mdo3" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-jump.png" id="4_dwh6w"]
 [ext_resource type="Texture2D" uid="uid://y56opwnp5lt2" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png" id="5_1x7ng"]
 [ext_resource type="Texture2D" uid="uid://fum41arvrbf8" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-attack.png" id="5_ml3re"]
@@ -16,8 +17,8 @@
 [ext_resource type="Script" path="res://Character/HurtState.gd" id="12_jm745"]
 [ext_resource type="Script" path="res://Character/facingCollisionShape2D.gd" id="13_vpjxb"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vfi8"]
-height = 40.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0qjy"]
+size = Vector2(20, 44)
 
 [sub_resource type="Animation" id="Animation_qdo23"]
 length = 0.001
@@ -142,7 +143,6 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_j2y27"]
 resource_name = "hurt"
 length = 0.3
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -328,6 +328,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_5j1vq"]
 resource_name = "jump_start"
 length = 0.3
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -462,7 +463,6 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pymey"]
 switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8lqmn"]
 
@@ -475,6 +475,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rjce1"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5l3lw"]
+switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_56q08"]
 states/Start/position = Vector2(188, 100)
@@ -496,30 +497,31 @@ graph_offset = Vector2(78.7298, 0)
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_0es38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_civ2i"]
-size = Vector2(30, 43)
+size = Vector2(40, 54)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurt_state", "coldDownTimer")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_s5o1q")
 hurt_state = NodePath("CharacterStateMachine/Hurt")
-coldDownTimer = NodePath("ColdDownTimer")
+coldDownTimer = NodePath("HealthColdDownTimer")
+GameOverScene = ExtResource("2_wrfj4")
 
-[node name="ColdDownTimer" type="Timer" parent="."]
+[node name="HealthColdDownTimer" type="Timer" parent="."]
 wait_time = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-3, -14)
 texture = ExtResource("1_ojsf8")
-hframes = 6
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visibility_layer = 3
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(-2, -14)
-shape = SubResource("CapsuleShape2D_1vfi8")
+position = Vector2(-3, -14)
+shape = SubResource("RectangleShape2D_h0qjy")
 one_way_collision_margin = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -544,26 +546,36 @@ script = ExtResource("7_1ybb6")
 air_state = NodePath("../Air")
 attack_state = NodePath("../Attack")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "attack_state")]
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("player", "ground_state", "attack_state")]
 script = ExtResource("8_whget")
+player = NodePath("../..")
 ground_state = NodePath("../Ground")
 attack_state = NodePath("../Attack")
 
-[node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "air_state")]
+[node name="Timer" type="Timer" parent="CharacterStateMachine/Air"]
+wait_time = 0.3
+one_shot = true
+
+[node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "air_state", "timer")]
 script = ExtResource("9_d5j7k")
 ground_state = NodePath("../Ground")
 air_state = NodePath("../Air")
+timer = NodePath("Timer")
 can_move = false
 
 [node name="Timer" type="Timer" parent="CharacterStateMachine/Attack"]
-wait_time = 0.2
+wait_time = 0.5
 one_shot = true
 
-[node name="Hurt" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "coldDownTimer", "player")]
+[node name="Hurt" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "hurtColdDownTimer", "player", "attack_state")]
 script = ExtResource("12_jm745")
 ground_state = NodePath("../Ground")
-coldDownTimer = NodePath("")
+hurtColdDownTimer = NodePath("HurtColdDownTimer")
 player = NodePath("../..")
+attack_state = NodePath("../Attack")
+
+[node name="HurtColdDownTimer" type="Timer" parent="CharacterStateMachine/Hurt"]
+one_shot = true
 
 [node name="stateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 texture_filter = 1
@@ -576,19 +588,25 @@ script = ExtResource("10_pslb4")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="sword" type="Area2D" parent="." node_paths=PackedStringArray("player", "facing_shape")]
-collision_mask = 4
+collision_layer = 7
+collision_mask = 7
 monitoring = false
 script = ExtResource("12_d3tgq")
 player = NodePath("..")
 facing_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sword"]
-position = Vector2(26, -16)
+position = Vector2(31, -16)
 shape = SubResource("RectangleShape2D_civ2i")
 script = ExtResource("13_vpjxb")
 facing_left_position = Vector2(-26, -16)
 facing_right_position = Vector2(26, -16)
 
-[connection signal="timeout" from="ColdDownTimer" to="." method="_on_cold_down_timer_timeout"]
+[connection signal="timeout" from="HealthColdDownTimer" to="." method="_on_cold_down_timer_timeout"]
+[connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
+[connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Hurt" method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="CharacterStateMachine/Air/Timer" to="CharacterStateMachine/Air" method="_on_timer_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/Attack/Timer" to="CharacterStateMachine/Attack" method="_on_timer_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/Hurt/HurtColdDownTimer" to="CharacterStateMachine/Hurt" method="_on_hurt_cold_down_timer_timeout"]
 [connection signal="body_entered" from="sword" to="sword" method="_on_body_entered"]

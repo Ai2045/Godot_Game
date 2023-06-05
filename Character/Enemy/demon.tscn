@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Character/Enemy/DeadState.gd" id="9_qkstm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6uab"]
-size = Vector2(160, 96)
+size = Vector2(112, 112)
 
 [sub_resource type="Animation" id="Animation_bya2g"]
 length = 0.001
@@ -221,7 +221,6 @@ texture = ExtResource("1_0w435")
 hframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_t6uab")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -235,8 +234,10 @@ tree_root = SubResource("AnimationNodeStateMachine_q431w")
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_07jpt")
 
-[node name="Damageable" type="Node" parent="."]
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("enemy", "health_bar")]
 script = ExtResource("5_yunle")
+enemy = NodePath("..")
+health_bar = NodePath("../ProgressBar")
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("5_tcyae")
@@ -267,8 +268,9 @@ enemy = NodePath("../..")
 [node name="ColdDownTimer" type="Timer" parent="CharacterStateMachine/Attack"]
 wait_time = 0.6
 
-[node name="Dead" type="Node" parent="CharacterStateMachine"]
+[node name="Dead" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("9_qkstm")
+enemy = NodePath("../..")
 can_move = false
 
 [node name="VisibityArea" type="Area2D" parent="."]
@@ -283,9 +285,19 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 light_mask = 4
-position = Vector2(-24, 16)
+position = Vector2(-16, 8)
 shape = SubResource("RectangleShape2D_h8frd")
 debug_color = Color(0.996078, 0.223529, 0.196078, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.486275, 0.988235, 0, 1)
+self_modulate = Color(0.486275, 0.988235, 0, 1)
+offset_left = -56.0
+offset_top = -64.0
+offset_right = 294.0
+offset_bottom = -37.0
+scale = Vector2(0.3, 0.3)
+show_percentage = false
 
 [connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Attack/ColdDownTimer" to="CharacterStateMachine/Attack" method="_on_cold_down_timer_timeout"]

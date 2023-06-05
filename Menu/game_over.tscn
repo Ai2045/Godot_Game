@@ -100,5 +100,5 @@ text = "QUIT"
 position = Vector2(576, 320)
 zoom = Vector2(2.3, 2.3)
 
-[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Try again Button" to="." method="_on_restart_button_button_up"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Try again Button" to="." method="_on_try_again_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Try again Button" to="." method="_on_restart_button_button_up"]

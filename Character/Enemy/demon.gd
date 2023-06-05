@@ -23,7 +23,7 @@ func _physics_process(delta):
 		var directionY = player.position.y - position.y
 		
 		position.x += directionX/speed
-		if position.y +100 <= player.position.y:
+		if position.y +50 <= player.position.y:
 			position.y += directionY/speed
 			
 		if directionX < 0:

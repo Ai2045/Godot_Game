@@ -1,5 +1,5 @@
 extends State
 
-
+@export var enemy: CharacterBody2D
 func on_enter():
-	get_parent().queue_free()
+	enemy.queue_free()

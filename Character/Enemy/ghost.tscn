@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://ihm5dje4bpiq" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-idle.png" id="1_jtfys"]
 [ext_resource type="Script" path="res://Character/Enemy/ghost.gd" id="1_rdxht"]
 [ext_resource type="Texture2D" uid="uid://b7fm862rmvksx" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-appears.png" id="2_bojor"]
-[ext_resource type="Script" path="res://Character/Enemy/Damageable.gd" id="2_ntdl5"]
 [ext_resource type="Texture2D" uid="uid://03mp5e8aegds" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-shriek.png" id="2_s3340"]
 [ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="4_01ukv"]
 [ext_resource type="Script" path="res://Character/Enemy/HitState.gd" id="6_s1g3t"]
+[ext_resource type="Script" path="res://Character/Enemy/GhostDamageable.gd" id="6_ywfrv"]
 [ext_resource type="Script" path="res://Character/Enemy/AppearState.gd" id="7_1y4lj"]
 [ext_resource type="Script" path="res://Character/Enemy/Idle.gd" id="8_6f007"]
 [ext_resource type="Script" path="res://Character/State.gd" id="10_yfs76"]
@@ -242,7 +242,7 @@ transitions = ["Start", "appears", SubResource("AnimationNodeStateMachineTransit
 size = Vector2(241, 133)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i12gb"]
-size = Vector2(66, 60.5)
+size = Vector2(55, 60.5)
 
 [node name="ghost" type="CharacterBody2D" node_paths=PackedStringArray("hit_state") groups=["Enemy"]]
 collision_layer = 4
@@ -266,8 +266,10 @@ tree_root = SubResource("AnimationNodeStateMachine_o55ce")
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_tr7ts")
 
-[node name="Damageable" type="Node" parent="."]
-script = ExtResource("2_ntdl5")
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("enemy", "health_bar")]
+script = ExtResource("6_ywfrv")
+enemy = NodePath("..")
+health_bar = NodePath("../ProgressBar")
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("4_01ukv")
@@ -310,14 +312,15 @@ can_move = false
 
 [node name="ColdDownTimer" type="Timer" parent="CharacterStateMachine/Shriek"]
 wait_time = 0.6
+one_shot = true
 
 [node name="Vanish" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("10_yfs76")
 can_move = false
 
 [node name="VisibityArea" type="Area2D" parent="."]
-collision_layer = 7
-collision_mask = 7
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisibityArea"]
 position = Vector2(1, 0)
@@ -329,9 +332,19 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 light_mask = 4
-position = Vector2(-1, -2)
+position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_i12gb")
 debug_color = Color(0.996078, 0.223529, 0.196078, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.486275, 0.988235, 0, 1)
+self_modulate = Color(0.486275, 0.988235, 0, 1)
+offset_left = -17.0
+offset_top = -33.0
+offset_right = 83.0
+offset_bottom = -6.0
+scale = Vector2(0.3, 0.3)
+show_percentage = false
 
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Hit" method="_on_animation_tree_animation_finished"]
@@ -342,6 +355,6 @@ debug_color = Color(0.996078, 0.223529, 0.196078, 0.419608)
 [connection signal="body_entered" from="VisibityArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="VisibityArea" to="." method="_on_area_2d_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_attackable_area_entered"]
-[connection signal="body_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_attackable_body_entered"]
+[connection signal="body_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_hurt_box_body_entered"]
 [connection signal="body_exited" from="HurtBox" to="CharacterStateMachine/Shriek" method="_on_attackable_body_exited"]
