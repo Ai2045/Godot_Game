@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c5e1ba5fowefh"
+path="res://.godot/imported/knight&monsters_soundpack.mp3-ddb36e0637ea5354ef6e3eb1896a6a6d.mp3str"
+
+[deps]
+
+source_file="res://assets/gothicvania patreon collection/music/sound/knight&monsters_soundpack.mp3"
+dest_files=["res://.godot/imported/knight&monsters_soundpack.mp3-ddb36e0637ea5354ef6e3eb1896a6a6d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

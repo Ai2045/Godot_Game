@@ -44,7 +44,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_8rjy0")
 theme_override_font_sizes/font_size = 125
-text = "Game"
+text = "GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -69,7 +69,7 @@ theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_7fgx1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_h1o46")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0p83f")
-text = "New Game"
+text = "NEW GAME"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -87,7 +87,7 @@ theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_7fgx1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_h1o46")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0p83f")
-text = "Options"
+text = "OPTIONS"
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -105,7 +105,7 @@ theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_7fgx1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_h1o46")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0p83f")
-text = "Made By"
+text = "MADE BY"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 320)

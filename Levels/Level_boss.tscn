@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Levels/ProgressBar.gd" id="3_khkte"]
 [ext_resource type="Script" path="res://Character/Camera2D.gd" id="4_quofw"]
 [ext_resource type="Texture2D" uid="uid://cn38hk3bx5xmv" path="res://assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-background.png" id="5_jd176"]
-[ext_resource type="Script" path="res://Levels/cabioLivello.gd" id="6_qitl1"]
+[ext_resource type="Script" path="res://Levels/finish_game.gd" id="6_foxb8"]
 [ext_resource type="PackedScene" uid="uid://t42qw0jhjwg2" path="res://Character/Enemy/demon.tscn" id="7_uj85n"]
 [ext_resource type="AudioStream" uid="uid://dvfiy2jv0s6ap" path="res://assets/gothicvania patreon collection/music/14. Centipede Demon.mp3" id="9_ac6m8"]
 [ext_resource type="PackedScene" uid="uid://bbfputm3x4ws0" path="res://Character/player.tscn" id="9_ogywv"]
@@ -1039,9 +1039,8 @@ region_rect = Rect2(0, 0, 1152, 304)
 position = Vector2(48, 40)
 collision_layer = 7
 collision_mask = 7
-script = ExtResource("6_qitl1")
+script = ExtResource("6_foxb8")
 animation_player = NodePath("../AnimationPlayer")
-next_level_path = "res://Levels/Level_2.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2(2216, -24)

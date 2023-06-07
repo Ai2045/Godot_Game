@@ -1,12 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://t42qw0jhjwg2"]
+[gd_scene load_steps=33 format=3 uid="uid://t42qw0jhjwg2"]
 
 [ext_resource type="Texture2D" uid="uid://7cucab51ymhu" path="res://assets/gothicvania patreon collection/demon-Files/PNG/demon-idle.png" id="1_0w435"]
 [ext_resource type="Script" path="res://Character/Enemy/demon.gd" id="1_ybxvy"]
 [ext_resource type="Texture2D" uid="uid://i100k8ara88t" path="res://assets/gothicvania patreon collection/demon-Files/PNG/demon-attack.png" id="2_f37mp"]
 [ext_resource type="Texture2D" uid="uid://bqxyxytegmouc" path="res://assets/gothicvania patreon collection/demon-Files/PNG/demon-attack-no-breath.png" id="3_nd3yu"]
+[ext_resource type="AudioStream" uid="uid://bda58nqkstlti" path="res://assets/gothicvania patreon collection/music/sound/attack_monster.wav" id="4_5gr8c"]
 [ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="5_tcyae"]
 [ext_resource type="Script" path="res://Character/Enemy/DemonDamageable.gd" id="5_yunle"]
 [ext_resource type="Script" path="res://Character/Enemy/Idle.gd" id="6_15udi"]
+[ext_resource type="AudioStream" uid="uid://ctpdk3dhya4f2" path="res://assets/gothicvania patreon collection/music/sound/walk_boss.wav" id="6_nyhsf"]
+[ext_resource type="AudioStream" uid="uid://bf123p3jeq481" path="res://assets/gothicvania patreon collection/music/sound/die_boss.wav" id="7_iuql7"]
 [ext_resource type="Script" path="res://Character/Enemy/DemonHitState.gd" id="7_lrug2"]
 [ext_resource type="Script" path="res://Character/Enemy/DemonAttackState.gd" id="8_ux7bt"]
 [ext_resource type="Script" path="res://Character/Enemy/DeadState.gd" id="9_qkstm"]
@@ -81,6 +84,21 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_5gr8c")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="Animation" id="Animation_wmxdj"]
 resource_name = "attack_no_breath"
@@ -122,6 +140,39 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_5gr8c")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="Animation" id="Animation_6rs86"]
+resource_name = "die"
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_iuql7")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
 
 [sub_resource type="Animation" id="Animation_lg1ko"]
 resource_name = "idle"
@@ -163,12 +214,28 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_nyhsf")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q2f6f"]
 _data = {
 "RESET": SubResource("Animation_bya2g"),
 "attack": SubResource("Animation_ak4s3"),
 "attack_no_breath": SubResource("Animation_wmxdj"),
+"die": SubResource("Animation_6rs86"),
 "idle": SubResource("Animation_lg1ko")
 }
 
@@ -212,13 +279,13 @@ size = Vector2(141.5, 120.5)
 
 [node name="Demon" type="CharacterBody2D" node_paths=PackedStringArray("hit_state") groups=["Enemy"]]
 collision_layer = 4
-collision_mask = 5
+collision_mask = 4
 script = ExtResource("1_ybxvy")
 hit_state = NodePath("CharacterStateMachine/Hit")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0w435")
-hframes = 11
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_t6uab")
@@ -285,7 +352,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 light_mask = 4
-position = Vector2(-16, 8)
+position = Vector2(-32, 16)
 shape = SubResource("RectangleShape2D_h8frd")
 debug_color = Color(0.996078, 0.223529, 0.196078, 0.419608)
 
@@ -298,6 +365,8 @@ offset_right = 294.0
 offset_bottom = -37.0
 scale = Vector2(0.3, 0.3)
 show_percentage = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Attack/ColdDownTimer" to="CharacterStateMachine/Attack" method="_on_cold_down_timer_timeout"]

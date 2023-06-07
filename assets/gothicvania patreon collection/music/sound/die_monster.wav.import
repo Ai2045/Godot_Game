@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dl1ebtndx4oxd"
+path="res://.godot/imported/die_monster.wav-2c6ffba2b5ed81e9bf665f61a908c53a.sample"
+
+[deps]
+
+source_file="res://assets/gothicvania patreon collection/music/sound/die_monster.wav"
+dest_files=["res://.godot/imported/die_monster.wav-2c6ffba2b5ed81e9bf665f61a908c53a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

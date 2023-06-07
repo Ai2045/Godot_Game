@@ -4,7 +4,7 @@ class_name DemonHitState
 
 @export var damageable : Damageable
 @export var dead_state : State
-@export var knockback_speed: float = 1000
+@export var knockback_speed: float = 300
 @export var return_state :State
 @onready var timer : Timer = $Timer
 

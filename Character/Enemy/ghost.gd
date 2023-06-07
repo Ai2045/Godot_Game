@@ -6,7 +6,6 @@ extends CharacterBody2D
 @export var hit_state: State
 @export var knockBack_speed = 1000
 @export var player_chase=false
-@export var visibility_area: Area2D
 var player=null
 var appeared = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.

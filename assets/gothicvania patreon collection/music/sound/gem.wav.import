@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fr1ac6xj5ve7"
+path="res://.godot/imported/gem.wav-6ee045596bb5a84a01e82ff07e8437a7.sample"
+
+[deps]
+
+source_file="res://assets/gothicvania patreon collection/music/sound/gem.wav"
+dest_files=["res://.godot/imported/gem.wav-6ee045596bb5a84a01e82ff07e8437a7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

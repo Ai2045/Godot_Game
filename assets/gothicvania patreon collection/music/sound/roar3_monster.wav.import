@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bu6treisicv04"
+path="res://.godot/imported/roar3_monster.wav-1326068461da386931b408bd3cc705a4.sample"
+
+[deps]
+
+source_file="res://assets/gothicvania patreon collection/music/sound/roar3_monster.wav"
+dest_files=["res://.godot/imported/roar3_monster.wav-1326068461da386931b408bd3cc705a4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

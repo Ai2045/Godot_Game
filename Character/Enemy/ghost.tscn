@@ -1,15 +1,18 @@
-[gd_scene load_steps=33 format=3 uid="uid://bhdni21kw8i2x"]
+[gd_scene load_steps=36 format=3 uid="uid://bhdni21kw8i2x"]
 
 [ext_resource type="Texture2D" uid="uid://dulh0vnqe7y8h" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-vanish.png" id="1_infjt"]
 [ext_resource type="Texture2D" uid="uid://ihm5dje4bpiq" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-idle.png" id="1_jtfys"]
 [ext_resource type="Script" path="res://Character/Enemy/ghost.gd" id="1_rdxht"]
 [ext_resource type="Texture2D" uid="uid://b7fm862rmvksx" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-appears.png" id="2_bojor"]
 [ext_resource type="Texture2D" uid="uid://03mp5e8aegds" path="res://assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-shriek.png" id="2_s3340"]
+[ext_resource type="AudioStream" uid="uid://du3autyot15fr" path="res://assets/gothicvania patreon collection/music/sound/roar_monster.wav" id="4_0xww8"]
 [ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="4_01ukv"]
+[ext_resource type="AudioStream" uid="uid://k5p54pu1its6" path="res://assets/gothicvania patreon collection/music/sound/hurt_monster.wav" id="6_q3xtf"]
 [ext_resource type="Script" path="res://Character/Enemy/HitState.gd" id="6_s1g3t"]
 [ext_resource type="Script" path="res://Character/Enemy/GhostDamageable.gd" id="6_ywfrv"]
 [ext_resource type="Script" path="res://Character/Enemy/AppearState.gd" id="7_1y4lj"]
 [ext_resource type="Script" path="res://Character/Enemy/Idle.gd" id="8_6f007"]
+[ext_resource type="AudioStream" uid="uid://dl1ebtndx4oxd" path="res://assets/gothicvania patreon collection/music/sound/die_monster.wav" id="8_mkk1w"]
 [ext_resource type="Script" path="res://Character/State.gd" id="10_yfs76"]
 [ext_resource type="Script" path="res://Character/Enemy/ShriekState.gd" id="11_etx73"]
 
@@ -70,6 +73,21 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_0xww8")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="Animation" id="Animation_oilu7"]
 resource_name = "idle"
@@ -152,6 +170,21 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_q3xtf")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="Animation" id="Animation_vbci6"]
 resource_name = "vanish"
@@ -192,6 +225,21 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_mkk1w")
+}],
+"times": PackedFloat32Array(-0.1)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o1wgy"]
 _data = {
@@ -250,8 +298,8 @@ script = ExtResource("1_rdxht")
 hit_state = NodePath("CharacterStateMachine/Hit")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_s3340")
-hframes = 4
+texture = ExtResource("2_bojor")
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xone8")
@@ -346,6 +394,8 @@ offset_bottom = -6.0
 scale = Vector2(0.3, 0.3)
 show_percentage = false
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Hit" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterStateMachine/Appears/Timer" to="CharacterStateMachine/Appears" method="_on_timer_timeout"]
@@ -355,6 +405,6 @@ show_percentage = false
 [connection signal="body_entered" from="VisibityArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="VisibityArea" to="." method="_on_area_2d_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_attackable_area_entered"]
-[connection signal="body_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_attackable_body_entered"]
 [connection signal="body_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="HurtBox" to="CharacterStateMachine/Idle" method="_on_attackable_body_entered"]
 [connection signal="body_exited" from="HurtBox" to="CharacterStateMachine/Shriek" method="_on_attackable_body_exited"]

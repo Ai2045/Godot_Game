@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bbfputm3x4ws0"]
+[gd_scene load_steps=54 format=3 uid="uid://bbfputm3x4ws0"]
 
 [ext_resource type="Texture2D" uid="uid://bdtqblptf1w1a" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png" id="1_ojsf8"]
 [ext_resource type="Script" path="res://Character/player.gd" id="1_s5o1q"]
@@ -6,14 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://t1e8w280mdo3" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-jump.png" id="4_dwh6w"]
 [ext_resource type="Texture2D" uid="uid://y56opwnp5lt2" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png" id="5_1x7ng"]
 [ext_resource type="Texture2D" uid="uid://fum41arvrbf8" path="res://assets/gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-attack.png" id="5_ml3re"]
+[ext_resource type="AudioStream" uid="uid://dcyenpnlio323" path="res://assets/gothicvania patreon collection/music/sound/attack_knight.wav" id="5_payt8"]
 [ext_resource type="Texture2D" uid="uid://djgqs4qpolsn2" path="res://assets/gothicvania patreon collection/Gothic-hero-p2-Files/PNG/spritesheets/gothic-hero-hurt.png" id="5_sjfq4"]
 [ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="6_i1chi"]
 [ext_resource type="Texture2D" uid="uid://q0bqnenw8kwf" path="res://assets/gothicvania patreon collection/Gothic-hero-p2-Files/PNG/spritesheets/gothic-hero-jump-attack.png" id="6_vhy5i"]
 [ext_resource type="Script" path="res://Character/GroundState.gd" id="7_1ybb6"]
+[ext_resource type="AudioStream" uid="uid://bo1ncnqhxkk3p" path="res://assets/gothicvania patreon collection/music/sound/hurt_knight.wav" id="8_5lknh"]
 [ext_resource type="Script" path="res://Character/AirState.gd" id="8_whget"]
 [ext_resource type="Script" path="res://Character/Attack.gd" id="9_d5j7k"]
 [ext_resource type="Script" path="res://Character/stateDebugLabel.gd" id="10_pslb4"]
+[ext_resource type="AudioStream" uid="uid://cvhj2fmc1yunl" path="res://assets/gothicvania patreon collection/music/sound/jump_knight.wav" id="10_tmbu8"]
 [ext_resource type="Script" path="res://Character/sword.gd" id="12_d3tgq"]
+[ext_resource type="AudioStream" uid="uid://bj7w8l840857b" path="res://assets/gothicvania patreon collection/music/sound/walk_knight.wav" id="12_dcv5r"]
 [ext_resource type="Script" path="res://Character/HurtState.gd" id="12_jm745"]
 [ext_resource type="Script" path="res://Character/facingCollisionShape2D.gd" id="13_vpjxb"]
 
@@ -45,6 +49,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("1_ojsf8")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_rucuq"]
@@ -98,6 +114,21 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_payt8")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_5c40u"]
 resource_name = "double_jump"
@@ -179,6 +210,21 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_5lknh")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="Animation" id="Animation_nfywq"]
 resource_name = "idle"
@@ -272,6 +318,21 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_payt8")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_scas4"]
 resource_name = "jump_end"
@@ -324,6 +385,21 @@ tracks/3/keys = {
 "update": 1,
 "values": []
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("10_tmbu8")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_5j1vq"]
 resource_name = "jump_start"
@@ -365,6 +441,21 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("10_tmbu8")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="Animation" id="Animation_mqnow"]
 resource_name = "run"
@@ -406,6 +497,25 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_dcv5r")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_dcv5r")
+}],
+"times": PackedFloat32Array(0, 0.6)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q1hqs"]
 _data = {
@@ -601,6 +711,8 @@ shape = SubResource("RectangleShape2D_civ2i")
 script = ExtResource("13_vpjxb")
 facing_left_position = Vector2(-26, -16)
 facing_right_position = Vector2(26, -16)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="HealthColdDownTimer" to="." method="_on_cold_down_timer_timeout"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Air" method="_on_animation_tree_animation_finished"]

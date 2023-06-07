@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bj7w8l840857b"
+path="res://.godot/imported/walk_knight.wav-881fc56487f1df5306e96b4bd5299526.sample"
+
+[deps]
+
+source_file="res://assets/gothicvania patreon collection/music/sound/walk_knight.wav"
+dest_files=["res://.godot/imported/walk_knight.wav-881fc56487f1df5306e96b4bd5299526.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

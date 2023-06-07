@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cpsxoybdt3s0b"
+path="res://.godot/imported/hurt2_monster.wav-1778bcb2f276f75e19bf7a13553164ca.sample"
+
+[deps]
+
+source_file="res://assets/gothicvania patreon collection/music/sound/hurt2_monster.wav"
+dest_files=["res://.godot/imported/hurt2_monster.wav-1778bcb2f276f75e19bf7a13553164ca.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

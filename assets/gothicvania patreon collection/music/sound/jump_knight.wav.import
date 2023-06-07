@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cvhj2fmc1yunl"
+path="res://.godot/imported/jump_knight.wav-0906a33dd613e912214a1865d69e99dc.sample"
+
+[deps]
+
+source_file="res://assets/gothicvania patreon collection/music/sound/jump_knight.wav"
+dest_files=["res://.godot/imported/jump_knight.wav-0906a33dd613e912214a1865d69e99dc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

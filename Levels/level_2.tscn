@@ -1,13 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://nurb0ksdc73l"]
+[gd_scene load_steps=18 format=3 uid="uid://nurb0ksdc73l"]
 
 [ext_resource type="Texture2D" uid="uid://v3uev2p8et5k" path="res://assets/gothicvania patreon collection/Gothic-Castle-Files/PNG/layers/gothic-castle-background.png" id="1_llwhm"]
 [ext_resource type="Texture2D" uid="uid://0rwvigjfaecr" path="res://assets/gothicvania patreon collection/Gothic-Castle-Files/PNG/layers/gothic-castle-tileset.png" id="2_mm7bd"]
 [ext_resource type="PackedScene" uid="uid://bbfputm3x4ws0" path="res://Character/player.tscn" id="3_g4chk"]
 [ext_resource type="PackedScene" uid="uid://33tu0ouidyxv" path="res://UI/health_changedmanager.tscn" id="4_7boys"]
-[ext_resource type="Script" path="res://Levels/cabioLivello.gd" id="5_0tkcv"]
+[ext_resource type="Script" path="res://Levels/Change_Level_boss.gd" id="5_imnr8"]
 [ext_resource type="Script" path="res://Character/Camera2D.gd" id="6_t0kh6"]
 [ext_resource type="PackedScene" uid="uid://bhdni21kw8i2x" path="res://Character/Enemy/ghost.tscn" id="7_bqctl"]
 [ext_resource type="Script" path="res://Levels/ProgressBar.gd" id="8_j7g0g"]
+[ext_resource type="AudioStream" uid="uid://cbp2j57khgxp6" path="res://assets/gothicvania patreon collection/music/01. Prologue.mp3" id="9_ol7oc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i1xf6"]
 texture = ExtResource("1_llwhm")
@@ -1540,9 +1541,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Door" type="Area2D" parent="." node_paths=PackedStringArray("animation_player")]
 collision_mask = 2
-script = ExtResource("5_0tkcv")
+script = ExtResource("5_imnr8")
 animation_player = NodePath("../AnimationPlayer")
-next_level_path = "res://Levels/Level_boss.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2(1689, 322)
@@ -1605,5 +1605,9 @@ self_modulate = Color(0.933333, 0.294118, 0.168627, 1)
 offset_right = 129.0
 offset_bottom = 27.0
 script = ExtResource("8_j7g0g")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ol7oc")
+autoplay = true
 
 [connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]
